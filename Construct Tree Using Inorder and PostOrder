@@ -1,0 +1,69 @@
+public class Solution {
+
+	/*	Binary Tree Node class
+	 * 
+	 * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	 */
+
+    public static BinaryTreeNode<Integer> helper(int[] post,int[] in,int postStart,int postEnd,int inStart,int inEnd){
+        
+        if(postStart>postEnd || inStart>inEnd){
+            return null;
+        }
+        int rootData=post[postEnd];
+        BinaryTreeNode<Integer> Node=new BinaryTreeNode<Integer>(rootData);
+        
+       
+        
+        int rootIndex=0;
+        for(int i=inStart;i<=inEnd;i++){
+            if(rootData==in[i]){
+                rootIndex=i;
+                break;
+            }
+            
+        }
+        
+        int leftPostSi=postStart;
+        int RightPostEi=postEnd-1;
+        int InLeftSi=inStart;
+        int InLeftEi=rootIndex-1;
+        int InRightSi=rootIndex+1;
+        int InRightEi=inEnd;
+        
+        int length=InLeftEi-InLeftSi+1;
+        
+        int leftPostEi=length+postStart-1;
+       int RightPostSi=leftPostEi+1;
+        
+        Node.left=helper(post,in,leftPostSi,leftPostEi,InLeftSi,InLeftEi);
+          Node.right=  helper(post,in,RightPostSi,RightPostEi,InRightSi,InRightEi);
+        //  Node.right=  helper(post,in,RightSi,RightPostEi,InRightSi,InRightEi);
+        
+        return Node;
+    }
+	public static BinaryTreeNode<Integer> getTreeFromPostorderAndInorder(int[] post,
+			int[] in){
+		
+			// Write your code here
+	int postStart=0;
+    int postEnd=post.length-1;
+    int inStart=0;
+    int inEnd=in.length-1;
+    
+    return helper(post,in,postStart,postEnd,inStart,inEnd);
+
+        
+	}
+
+	
+
+}
