@@ -1,0 +1,45 @@
+public class Solution {
+
+	/*	Binary Tree Node class
+	 * 
+	 * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+
+	PairAns class - 
+	class PairAns {
+		int min;
+		int max;
+	}
+
+	 */
+	public static PairAns minMax(BinaryTreeNode<Integer> root) {
+		 if (root == null) {
+             PairAns res = new PairAns();
+             res.max = Integer.MIN_VALUE;
+             res.min = Integer.MAX_VALUE;
+             return res;
+         }
+        PairAns res = new PairAns();
+        res.min = root.data; res.max = root.data;
+        PairAns lres = minMax(root.left);
+        PairAns rres = minMax(root.right);
+        if (lres.max > res.max)
+            res.max = lres.max;
+        if (rres.max > res.max)
+            res.max = rres.max;
+    if (lres.min < res.min)
+        res.min = lres.min;
+    if (rres.min < res.min)
+        res.min = rres.min;
+    return res;
+	}
+
+
+}
