@@ -1,0 +1,39 @@
+public class Solution {
+
+/*	Binary Tree Node class
+ * 
+ * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+		
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	*/
+	
+    public static void printSum(BinaryTreeNode<Integer> root,int k,String buffer){
+        
+        if(root.data==k){
+            buffer=buffer+root.data+" ";
+           // buffer=buffer+" "+root.data;
+            System.out.println(buffer);
+            return;
+        }
+        buffer=buffer+root.data+" ";
+        // buffer=buffer+" "+root.data;
+        if(root.left!=null){
+           printSum(root.left,k-root.data,buffer);    
+        }
+        if(root.right!=null){
+        printSum(root.right,k-root.data,buffer);
+        }
+    }
+    
+	public static void rootToLeafPathsSumToK(BinaryTreeNode<Integer> root, int k) {
+		// Write your code here
+		
+        printSum(root,k,"");
+	}
+}
