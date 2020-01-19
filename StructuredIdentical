@@ -1,0 +1,58 @@
+// Following is the Tree node structure
+/**************
+template <typename T>
+class TreeNode {
+public:
+    T data;
+    vector<TreeNode<T>*> children;
+    
+    TreeNode(T data) {
+        this->data = data;
+    }
+    
+    ~TreeNode() {
+        for (int i = 0; i < children.size(); i++) {
+            delete children[i];
+        }
+    }
+};
+***************/
+
+bool isIdentical(TreeNode<int> *root1, TreeNode<int> * root2) {
+    /* Don't write main().
+     * Don't read input, it is passed as function argument.
+     * Return output and don't print it.
+     * Taking input and printing output is handled automatically.
+     */
+    
+    if(root1==NULL && root2==NULL){
+        return true;
+    }
+    if((root1==NULL && root2!=NULL)||(root1!=NULL && root2==NULL)){
+        return false;
+    }
+    
+    if((root1->data!=root2->data)||(root1->children.size()!=root2->children.size())){
+        return false;
+    }
+    
+    
+    int i=0;
+    while(i<root1->children.size()){
+        TreeNode<int> *child1=root1->children[i];
+        TreeNode<int> *child2=root2->children[i];
+        
+        if(isIdentical(child1,child2)){
+            i++;
+        }
+        else{
+            return false;
+        }
+        
+        
+    }
+    
+    return true;
+    
+
+}
