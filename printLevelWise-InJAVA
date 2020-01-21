@@ -1,0 +1,73 @@
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class Solution {
+
+    
+    
+/*	Binary Tree Node class
+ * 
+ * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+		
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	*/
+	public static void printLevelWise(BinaryTreeNode<Integer> root) {
+        
+        if(root==null){
+            return;
+        }
+        
+        Queue<BinaryTreeNode<Integer>> q=new LinkedList<>();
+        
+        
+        q.add(root);
+        q.add(null);
+        
+        while(!q.isEmpty()){
+        
+        
+            
+            BinaryTreeNode<Integer> node=q.remove();
+        
+            if(node==null){
+                if(!q.isEmpty()){
+                q.add(null);    
+                }
+                
+            }
+            else{
+                System.out.print(node.data+":");
+            
+            if(node.left!=null){
+                q.add(node.left);
+                System.out.print("L:"+node.left.data+",");
+            }
+            
+            if(node.left==null){
+                System.out.print("L:-1,");
+            }
+            
+            if(node.right!=null){
+                q.add(node.right);
+                System.out.print("R:"+node.right.data);
+            }
+            
+            if(node.right==null){
+                System.out.print("R:-1");
+            }
+            
+            System.out.println();
+        }
+		
+            }
+            
+		
+	}
+	
+}
