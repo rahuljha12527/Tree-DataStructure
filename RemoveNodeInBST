@@ -1,0 +1,51 @@
+public class Solution {
+
+	public static BinaryTreeNode<Integer> removeNode(int data, BinaryTreeNode<Integer> root) {
+		/* Your class should be named Solution
+		* Don't write main().
+		* Don't read input, they are passed as function arguments.
+		* Return output and don't print it.
+		* Taking input and printing output is handled automatically.
+		*/
+        
+        if(root==null){
+            return root;
+        }
+        
+        if(data<root.data){
+            root.left=removeNode(data,root.left);
+        }
+        
+        else if(data>root.data){
+            root.right=removeNode(data,root.right);
+        }
+        
+        else{
+            
+            if(root.left==null){
+                return root.right;
+            }
+            
+            if(root.right==null){
+                return root.left;
+            }
+            
+            root.data=minValue(root.right);
+            
+            root.right=removeNode(root.data,root.right);
+        }
+        
+        return root;
+		
+	}
+    
+    public static int minValue(BinaryTreeNode<Integer> root){
+        int minv=root.data;
+        
+        while(root.left!=null){
+            minv=root.left.data;
+            root=root.left;
+        }
+        return minv;
+    }
+}
