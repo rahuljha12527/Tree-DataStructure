@@ -1,0 +1,75 @@
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+BinaryTreeNode<int>* buildTreeHelper(int *preOrder,int preS,int preE,int *inorder,int inS,int inE){
+    
+    if(preS>preE || inS>inE ){
+        return NULL;
+    }
+    
+    int rootData=preOrder[preS];
+    
+    int rootIndex=-1;
+
+    
+    for(int i=inS;i<=inE;i++){
+        
+        if(inorder[i]==rootData){
+            rootIndex=i;
+            break;
+        }
+        
+        
+    }
+    
+  
+  //  int RpreS=
+    int linStart=inS;  //  
+    int linEnd=rootIndex-1;//
+     int lpreSt=preS+1;
+      int lpreEn= linEnd-linStart+lpreSt;
+   int RpreS=lpreEn+1;
+    int RpreE=preE;
+  
+  int  RinStart=rootIndex+1;
+ 
+    int  RinEnd=inE;
+    
+     
+   
+    
+  
+   
+    BinaryTreeNode<int>* root=new BinaryTreeNode<int>(rootData);
+    
+    
+    root->left=buildTreeHelper(preOrder,lpreSt,lpreEn,inorder,linStart,linEnd);
+    root->right=buildTreeHelper(preOrder,RpreS,RpreE,inorder,RinStart,RinEnd);
+    
+    
+    return root;
+    
+}
+
+BinaryTreeNode<int>* buildTree(int *preorder, int preLength, int *inorder, int inLength) {
+ 
+  
+    return buildTreeHelper(preorder,0,preLength-1,inorder,0,inLength-1);
+    
+    
+
+    
+}
