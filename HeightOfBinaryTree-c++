@@ -1,0 +1,46 @@
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+int height(BinaryTreeNode<int> *root,int count){
+    
+    if(root==NULL){
+        return 0;
+    }
+  
+    
+    
+    int ans=height(root->left,count+1);
+    int answer=height(root->right,count+1);
+    
+    int max=(ans>answer) ? ans:answer;
+    
+    return max+1;
+    
+    
+}
+
+int height(BinaryTreeNode<int> *root) {
+    /* Don't write main().
+     * Don't read input, it is passed as function argument.
+     * Return output and don't print it.
+     * Taking input and printing output is handled automatically.
+     */
+
+    
+    int count=0;
+    
+    return height(root,count);
+}
