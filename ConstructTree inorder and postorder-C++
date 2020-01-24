@@ -1,0 +1,75 @@
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+
+BinaryTreeNode<int>* buildTree(int *postorder,int postStart,int postEnd,int *inorder,int inStart,int inEnd){
+    
+    if(postStart>postEnd || inStart>inEnd){
+    
+        return NULL;
+    }
+    
+    int rootData=postorder[postEnd];
+    BinaryTreeNode<int>* root=new BinaryTreeNode<int>(rootData);
+    int rootIndex=-1;
+    for(int i=inStart;i<=inEnd;i++){
+        
+        if(rootData==inorder[i]){
+            rootIndex=i;
+            break;
+        }
+        
+        
+    }
+    
+    int poLeftStart=postStart;
+
+       int poRightEnd=postEnd-1;
+    
+    
+    
+    int inLeftStart=inStart;
+    int inLeftEnd=rootIndex-1;
+    
+    
+    int inRightStart=rootIndex+1;
+    int inRightEnd=inEnd;
+    
+    
+    int length=inLeftEnd-inLeftStart+1;
+    
+    int poLeftEnd=length+postStart-1;
+    
+    int poRightStart=poLeftEnd+1;
+      
+    
+    root->left=buildTree(postorder,poLeftStart,poLeftEnd,inorder,inLeftStart,inLeftEnd);
+    root->right=buildTree(postorder,poRightStart,poRightEnd,inorder,inRightStart,inRightEnd);
+    return root;
+    
+    
+    
+    
+        
+}
+BinaryTreeNode<int>* getTreeFromPostorderAndInorder(int *postorder, int postLength, int *inorder, int inLength) {
+    
+    
+   
+    
+    return buildTree(postorder,0,postLength-1,inorder,0,inLength-1);
+    
+}
