@@ -1,0 +1,48 @@
+ 
+    class pair<T,V>{
+        public T height;
+        public V diameter;
+    }
+
+public class Solution {
+
+	public static pair<Integer,Integer> heightDiameter(BinaryTreeNode<Integer> root){
+        
+        if(root==null){
+        
+            pair<Integer,Integer> output=new pair<>();
+            output.height=0;
+            output.diameter=0;
+            
+            return output;
+        }
+        
+        
+        pair<Integer,Integer> leftHeight=heightDiameter(root.left);
+        
+        pair<Integer,Integer> rightHeight=heightDiameter(root.right);
+        
+        int Height=1+Math.max(leftHeight.height,rightHeight.height);
+        int option1=leftHeight.height+rightHeight.height;
+        int option2=leftHeight.diameter;
+        int option3=rightHeight.diameter;
+        
+        int diameterAllOver=Math.max(1+option1,Math.max(option2,option3));
+        
+        pair<Integer,Integer> output=new pair<>();
+        output.height=Height;
+        output.diameter=diameterAllOver;
+        
+        return output;
+    }
+    
+    
+	public static int diameterOfBinaryTree(BinaryTreeNode<Integer> root){
+	
+        pair<Integer,Integer> output=heightDiameter(root);
+        return output.diameter;
+        
+	}
+	
+	
+}
