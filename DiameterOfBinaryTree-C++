@@ -1,0 +1,58 @@
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+class Diapair{
+  public:
+    int diameter;
+    int height;
+};
+
+
+Diapair heightDiameter(BinaryTreeNode<int>* root){
+    
+    if(root==NULL){
+        
+        Diapair d;
+        d.diameter=0;
+        d.height=0;
+        return d;
+    }
+    
+    
+    Diapair leftHeight=heightDiameter(root->left);
+    Diapair rightHeight=heightDiameter(root->right);
+    
+    int Height=1+max(leftHeight.height,rightHeight.height);
+    
+    int option1=leftHeight.height +rightHeight.height;
+    int option2=leftHeight.diameter;
+    int option3=rightHeight.diameter;
+    
+    int diameterAllOver=max(1+option1,max(option2,option3));
+    
+    Diapair ans;
+    ans.height=Height;
+    ans.diameter=diameterAllOver;
+    
+    return ans;
+    
+}
+
+int diameter(BinaryTreeNode<int>* root) {
+  
+    Diapair ans=heightDiameter(root);
+    
+    return ans.diameter;
+}
