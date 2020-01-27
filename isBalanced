@@ -1,0 +1,52 @@
+// Following is the Binary Tree node structure
+#include<math.h>
+
+
+class Pair{
+   
+   public: 
+    int height;
+    bool isBal;
+};
+
+
+Pair* Balanced(BinaryTreeNode<int> *root){
+    
+    if(root==NULL){
+        
+        Pair *ans=new Pair();
+        ans->height=0;
+        ans->isBal=true;
+        return ans;
+    }
+    
+    
+    Pair *leftAns=Balanced(root->left);
+    Pair *rightAns=Balanced(root->right);
+    
+    int Height=1+max(leftAns->height,rightAns->height);
+    bool flag=true;
+    if(abs(leftAns->height-rightAns->height)>1){
+        flag=false;
+    }
+    
+    if(!leftAns->isBal  || !rightAns->isBal){
+        flag=false;
+    }
+    
+    Pair *ans=new Pair();
+    
+    ans->isBal=flag;
+    ans->height=Height;
+    
+    
+    return ans;
+    
+    
+}
+bool isBalanced(BinaryTreeNode<int> *root) {
+    // Write your code here
+
+    
+    return Balanced(root)->isBal;
+}
