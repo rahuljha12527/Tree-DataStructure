@@ -1,0 +1,56 @@
+import java.lang.Math;
+
+public class Solution {
+
+public  static class pair{
+        
+        int height;
+        boolean isBal;
+    }
+
+    
+    
+    public static pair Balanced(BinaryTreeNode<Integer> root){
+        
+        if(root==null){
+            pair ans=new pair();
+            ans.height=0;
+            ans.isBal=true;
+            return ans;
+        }
+        
+        
+        
+        
+        pair leftans=Balanced(root.left);
+        pair rightans=Balanced(root.right);
+        
+        int Height=1+Math.max(leftans.height,rightans.height);
+        
+        boolean flag=true;
+        if(Math.abs(leftans.height-rightans.height)>1){
+            flag=false;
+        }
+        
+        if(!leftans.isBal  || !rightans.isBal){
+            flag=false;
+        }
+        
+        pair  ans=new pair();
+        ans.height=Height;
+        ans.isBal=flag;
+        
+        
+        return ans;
+        
+    }
+    
+	public static boolean checkBalanced(BinaryTreeNode<Integer> root){
+		
+		return Balanced(root).isBal;
+		
+	}
+
+	
+	
+}
