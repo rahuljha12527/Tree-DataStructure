@@ -1,0 +1,45 @@
+#include<climits>
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+ 
+ // PairAns class -
+ class PairAns {
+    public :
+        int min;
+        int max;
+ };
+ 
+***************/
+
+PairAns minMax(BinaryTreeNode<int> *root) {
+   
+    
+   if(root==NULL){
+       PairAns ans;
+       ans.min=INT_MAX;
+       ans.max=INT_MIN;
+       return ans;
+   }
+    
+    PairAns leftAns=minMax(root->left);
+    PairAns rightAns=minMax(root->right);
+    
+    
+    PairAns res;
+    res.min=min(root->data,min(leftAns.min,rightAns.min));
+    res.max=max(root->data,max(leftAns.max,rightAns.max));
+    
+    return res;
+}
