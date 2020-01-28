@@ -1,0 +1,72 @@
+// Following is the Node and Binary Tree node structure
+
+
+#include<bits/stdc++.h>
+vector<node<int>*> createLLForEachLevel(BinaryTreeNode<int> *root) {
+    // Write your code here
+  
+    vector<node<int>*> output;
+    
+    queue<BinaryTreeNode<int>*>  q;
+    
+    node<int> *head=NULL;
+    node<int> *tail=NULL;
+    
+    
+    q.push(root);
+    q.push(NULL);
+    
+    while(!q.empty()){
+        
+     
+        BinaryTreeNode<int> *curr=q.front();
+        q.pop();
+        
+        if(curr==NULL){
+            
+            output.push_back(head);
+            
+            head=NULL;
+            tail=NULL;    
+            
+            
+            if(!q.empty()){
+                
+              q.push(NULL);
+                
+                
+            }
+            
+        }
+        else{
+            
+            if(curr->left!=NULL){
+                q.push(curr->left);
+            }
+            
+            if(curr->right!=NULL){
+                q.push(curr->right);
+            }
+            
+            
+            node<int> *newNode=new node<int>(curr->data);
+            
+            if(head==NULL){
+                head=newNode;
+                tail=newNode;
+                
+            }
+            else{
+                
+                tail->next=newNode;
+                tail=tail->next;
+                
+            }
+            
+            
+        }                
+        
+    }
+    return output;
+    
+}
