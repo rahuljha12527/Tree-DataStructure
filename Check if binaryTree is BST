@@ -1,0 +1,48 @@
+#include<bits/stdc++.h> 
+class isBSTReturn{
+  public: 
+    int minimum;
+    int maximum;
+    bool isBST;
+    
+};
+
+isBSTReturn isBST2(BinaryTreeNode<int> *root){
+    
+    if(root==NULL){
+        
+        isBSTReturn output;
+        output.minimum=INT_MAX;
+        output.maximum=INT_MIN;
+        output.isBST=true;
+        return output;
+    }
+    
+    
+    isBSTReturn leftAns=isBST2(root->left);
+    isBSTReturn rightAns=isBST2(root->right);
+    
+    int minimum=min(root->data,min(leftAns.minimum,rightAns.minimum));
+    
+    int maximum=max(root->data,max(leftAns.maximum,rightAns.maximum));
+    
+    
+    bool isBSTFinal=  (leftAns.maximum<root->data) && (rightAns.minimum>=root->data)  && leftAns.isBST && rightAns.isBST;
+    
+    isBSTReturn output;
+    
+    output.minimum=minimum;
+    output.maximum=maximum;
+    
+    output.isBST=isBSTFinal;
+        
+    return output;
+}
+
+
+
+bool isBST(BinaryTreeNode<int> *root){
+   
+    return isBST2(root).isBST;
+    
+}
