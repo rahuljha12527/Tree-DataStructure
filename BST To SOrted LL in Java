@@ -1,0 +1,64 @@
+class  SortedLL{
+    
+    LinkedListNode<Integer> head;
+    LinkedListNode<Integer> tail;
+}
+public class Solution {
+
+
+    public static SortedLL sortedLL(BinaryTreeNode<Integer> root){
+        
+        if(root==null){
+            SortedLL output=new SortedLL();
+            output.head=null;
+            output.tail=null;
+            return output;
+        }
+        
+        SortedLL l=sortedLL(root.left);
+        SortedLL r=sortedLL(root.right);
+        
+        
+        LinkedListNode<Integer>  n=new LinkedListNode<Integer>(root.data);
+        
+        if(l.tail!=null){
+            l.tail.next=n;
+        }
+        
+        if(r.head!=null){
+            n.next=r.head;
+        }
+        
+        
+        
+        SortedLL b=new SortedLL();
+        
+        if(l.head!=null){
+           b.head=l.head; 
+        }
+        else{
+            b.head=n;
+        }
+        
+        if(r.tail!=null){
+            b.tail=r.tail;
+            
+        }
+        else{
+            b.tail=n;
+        }
+        
+        return b;
+        
+        
+        
+    }
+	public static LinkedListNode<Integer> BSTToSortedLL(BinaryTreeNode<Integer> root){
+	
+        return sortedLL(root).head;
+	}
+    
+    
+}	
+
+
