@@ -1,0 +1,59 @@
+
+
+class sorted{
+  
+    public:
+       Node<int>* head;
+       Node<int>* tail;
+};
+
+sorted TreeD(BinaryTreeNode<int>* root){
+    
+    if(root==NULL){
+        sorted output;
+        output.head=NULL;
+        output.tail=NULL;
+        return output;
+    }
+    
+    sorted l=TreeD(root->left);
+    sorted r=TreeD(root->right);
+    
+    
+    Node<int>* n=new Node<int>(root->data);
+    
+    if(l.tail!=NULL){
+      l.tail->next=n;     
+    }
+    if(r.head!=NULL){
+         n->next=r.head;
+    }
+   // n->next=r.head;
+    sorted b;
+    if(l.head!=NULL){
+      b.head=l.head;    
+    }
+    else{
+        b.head=n;
+    }
+    
+    if(r.tail!=NULL){
+      b.tail=r.tail;     
+    }
+    else{
+        b.tail=n;
+    }
+   
+    
+    return b;
+    
+       
+    
+    
+}
+Node<int>* constructBST(BinaryTreeNode<int>* root) {
+    sorted b=TreeD(root);
+    return b.head;
+    
+      
+}
